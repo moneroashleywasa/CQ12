@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        .error {
+            color: red;
+            display: none;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="email"], input[type="password"], input[type="file"], select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group-inline {
+            display: flex;
+            align-items: center;
+        }
+        .form-group-inline label {
+            margin-right: 10px;
+        }
+        .form-group-inline input[type="radio"], .form-group-inline input[type="checkbox"] {
+            margin-right: 5px;
+        }
+        button {
+            background-color: blue;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <form id="registrationForm">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name">
+            <div class="error" id="nameError">Please enter your name!</div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email">
+            <div class="error" id="emailError">Please enter a valid email!</div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password">
+            <div class="error" id="passwordError">Please enter your password!</div>
+        </div>
+        <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" name="confirm-password" placeholder="Enter your confirm password">
+            <div class="error" id="confirmPasswordError">Passwords do not match!</div>
+        </div>
+        <div class="form-group">
+            <label for="mobile-number">Mobile number</label>
+            <input type="text" id="mobile-number" name="mobile-number" placeholder="Enter your mobile number">
+            <div class="error" id="mobileNumberError">Please enter your mobile number!</div>
+        </div>
+        <div class="form-group">
+            <label for="language">Language</label>
+            <select id="language" name="language">
+                <option value="">Select language</option>
+                <option value="english">English</option>
+                <option value="french">French</option>
+                <option value="swahili">Swahili</option>
+                <option value="german">German</option>
+                <option value="french">French</option>
+                <option value="spanish">Spanish</option>
+                <option value="chinese">Chinese</option>
+                <option value="japanese">Japanese</option>
+                <option value="hindi">Hindi</option>
+                <option value="arabic">Arabic</option>
+                <option value="russian">Russian</option>
+                <option value="italian">Italian</option>
+                <option value="korean">Korean</option>
+                <option value="portuguese">Portuguese</option>
+                <option value="hebrew">Hebrew</option>
+                <option value="gaelic">Gaelic</option>
+                <option value="hawaiian">Hawaiian</option>
+                <option value="greek">Greek</option>
+                <option value="swedish">Swedish</option>
+                <option value="bengali">Bengali</option>
+                <option value="mandarin">Mandarin</option>
+                <option value="telugu">Telugu</option>
+                <option value="marathi">Marathi</option>
+                <option value="turkish">Turkish</option>
+
+                
+            </select>
+            <div class="error" id="languageError">Please select your language!</div>
+        </div>
+        <div class="form-group">
+            <label for="attachment">Attachment</label>
+            <input type="file" id="attachment" name="attachment" accept=".jpg, .png, .pdf, .zip">
+            <div class="error" id="attachmentError">Please select a valid file (JPG, PNG, PDF, ZIP)!</div>
+        </div>
+        <div class="form-group form-group-inline">
+            <label>Gender</label>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label>
+            <div class="error" id="genderError">Please select your gender!</div>
+        </div>
+        <div class="form-group form-group-inline">
+            <input type="checkbox" id="terms" name="terms">
+            <label for="terms">I accept the <a href="#">Terms of Use</a></label>
+            <div class="error" id="termsError">You must accept the terms and conditions!</div>
+        </div>
+        <button type="submit">Register Now</button>
+    </form>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let isValid = true;
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const mobileNumber = document.getElementById('mobile-number').value;
+            const language = document.getElementById('language').value;
+            const attachment = document.getElementById('attachment').value;
+            const gender = document.querySelector('input[name="gender"]:checked');
+            const terms = document.getElementById('terms').checked;
+
+            if (name === '') {
+                isValid = false;
+                document.getElementById('nameError').style.display = 'block';
+            } else {
+                document.getElementById('nameError').style.display = 'none';
+            }
+
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (email === '' || !emailPattern.test(email)) {
+                isValid = false;
+                document.getElementById('emailError').style.display = 'block';
+            } else {
+                document.getElementById('emailError').style.display = 'none';
+            }
+
+            if (password === '') {
+                isValid = false;
+                document.getElementById('passwordError').style.display = 'block';
+            } else {
+                document.getElementById('passwordError').style.display = 'none';
+            }
+
+            if (confirmPassword === '' || confirmPassword !== password) {
+                isValid = false;
+                document.getElementById('confirmPasswordError').style.display = 'block';
+            } else {
+                document.getElementById('confirmPasswordError').style.display = 'none';
+            }
+
+            if (mobileNumber === '') {
+                isValid = false;
+                document.getElementById('mobileNumberError').style.display = 'block';
+            } else {
+                document.getElementById('mobileNumberError').style.display = 'none';
+            }
+
+            if (language === '') {
+                isValid = false;
+                document.getElementById('languageError').style.display = 'block';
+            } else {
+                document.getElementById('languageError').style.display = 'none';
+            }
+
+            const validExtensions = ['jpg', 'png', 'pdf', 'zip'];
+            const fileExtension = attachment.split('.').pop().toLowerCase();
+            if (attachment === '' || !validExtensions.includes(fileExtension)) {
+                isValid = false;
+                document.getElementById('attachmentError').style.display = 'block';
+            } else {
+                document.getElementById('attachmentError').style.display = 'none';
+            }
+
+            if (!gender) {
+                isValid = false;
+                document.getElementById('genderError').style.display = 'block';
+            } else {
+                document.getElementById('genderError').style.display = 'none';
+            }
+
+            if (!terms) {
+                isValid = false;
+                document.getElementById('termsError').style.display = 'block';
+            } else {
+                document.getElementById('termsError').style.display = 'none';
+            }
+
+            if (isValid) {
+                alert('Registration successful!');
+            }
+        });
+    </script>
+</body>
+</html>
